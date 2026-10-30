@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Coach and Go - Book Tennis & Padel Coaches</title>
+    <style>
+        :root {
+            /* Purple & Blue Theme Palette */
+            --bg-purple: #2e1065;        /* Deep purple background */
+            --card-purple: #3b0764;      /* Dark purple for cards */
+            --card-border: #581c87;      /* Subtle border contrast */
+            --accent-blue: #38bdf8;      /* Bright blue accent */
+            --accent-blue-hover: #0284c7;/* Darker blue for active states */
+            --text-light: #f3e8ff;       /* Soft light purple-white text */
+            --text-muted: #c084fc;       /* Muted light purple for subtitles */
+            --danger-border: #f43f5e;    /* Red border accent for problem cards */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-purple);
+            color: var(--text-light);
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* iPhone Display Frame Container */
+        .app-container {
+            width: 100%;
+            max-width: 430px; /* Fits iPhone 14/15/16 Pro Max dimensions */
+            min-height: 100vh;
+            background-color: var(--bg-purple);
+            display: flex;
+            flex-direction: column;
+            padding-top: env(safe-area-inset-top, 20px);
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(46, 16, 101, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .btn-demo {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-blue);
+            padding: 0.4rem 0.85rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid var(--accent-blue);
+            transition: all 0.2s ease;
+        }
+
+        .btn-demo:active {
+            background: var(--accent-blue);
+            color: var(--bg-purple);
+        }
+
+        .hero {
+            padding: 2.5rem 1.25rem 1.5rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .hero h1 span {
+            color: var(--accent-blue);
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: var(--bg-purple);
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            display: inline-block;
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+            transition: background 0.2s ease;
+        }
+
+        .btn-primary:active {
+            background: var(--accent-blue-hover);
+        }
+
+        section {
+            padding: 1.5rem 1.25rem;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1.25rem;
+            color: var(--text-light);
+        }
+
+        .problem-card {
+            background: var(--card-purple);
+            border-left: 4px solid var(--danger-border);
+            border-top: 1px solid var(--card-border);
+            border-right: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 0.85rem;
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .steps-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .step-card {
+            background: var(--card-purple);
+            border: 1px solid var(--card-border);
+            padding: 1.1rem;
+            border-radius: 14px;
+            display: flex;
+            gap: 0.85rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: var(--accent-blue);
+            color: var(--bg-purple);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .step-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-light);
+        }
+
+        .step-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .pricing-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pricing-card {
+            background: var(--card-purple);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--accent-blue);
+            position: relative;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .price {
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: var(--accent-blue);
+            margin: 0.3rem 0 0.5rem;
+        }
+
+        .price span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .pricing-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .waiting-list {
+            background: var(--card-purple);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            margin: 1.25rem;
+            padding: 1.5rem 1.1rem;
+            text-align: center;
+        }
+
+        .waiting-list h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .waiting-list input {
+            width: 100%;
+            padding: 0.85rem;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            background: var(--bg-purple);
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .waiting-list input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .waiting-list input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .success-message {
+            display: none;
+            background: var(--accent-blue);
+            color: var(--bg-purple);
+            padding: 0.85rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem 2.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <a href="#" class="logo">Coach and Go</a>
+            <a href="app.html" class="btn-demo">Try Demo</a>
+        </header>
+
+        <section class="hero">
+            <h1>Make booking easy and <span>all in the one place</span>.</h1>
+            <p>No more calling around or messaging on social media. Find available coaches and courts instantly.</p>
+            <a href="app.html" class="btn-primary">Try the Demo</a>
+        </section>
+
+        <section>
+            <h2 class="section-title">Sound Familiar?</h2>
+            <div class="problem-card">
+                “I cannot book an individual tennis or padel lesson with a coach in the evenings or weekends.”
+            </div>
+            <div class="problem-card">
+                “The only time I can book a tennis lesson is early morning or lunchtime mid week.”
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Coach Sets Availability</h3>
+                        <p>Coaches upload court and availability blocks (at least 3 hours, 1+ days a week) completely free.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>Find a Convenient Time</h3>
+                        <p>Players search for open lesson slots that match their exact schedule and preferred location.</p>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Book Instantly</h3>
+                        <p>Book the coach effortlessly. Pay a small booking fee online, and pay your coach directly for the lesson.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Simple Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Pay As You Go</h3>
+                    <div class="price">€2.50</div>
+                    <p>Per booking fee only when you secure your coach slot.</p>
+                </div>
+                <div class="pricing-card popular">
+                    <h3>Monthly Unlimited</h3>
+                    <div class="price">€10<span>/mo</span></div>
+                    <p>Book unlimited lessons whenever you want.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="waiting-list">
+            <h2>Join the Player Waiting List</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.85rem;">Be the first to access evening and weekend coaching slots.</p>
+            <form id="waitingForm">
+                <input type="email" id="emailInput" placeholder="Enter your email address" required>
+                <button type="submit" class="btn-primary">Join Waiting List</button>
+            </form>
+            <div id="successMsg" class="success-message">🎉 You're on the list! We'll notify you when we launch.</div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Coach and Go. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('waitingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            if(email) {
+                document.getElementById('waitingForm').style.display = 'none';
+                document.getElementById('successMsg').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
